@@ -1,8 +1,12 @@
+"use client"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Monitor, ShieldCheck, GraduationCap } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function HomePage() {
+  const {user} = useAuthStore()
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white">
       <div className="text-center space-y-6 max-w-2xl px-4">
@@ -26,7 +30,7 @@ export default function HomePage() {
               Staff Login
             </Button>
           </Link>
-          <Link href="/live/demo-teacher">
+          <Link href={`/live/${user?.id}`}>
             <Button size="lg" variant="outline" className="px-8 h-12 cursor-pointer text-base font-semibold border-slate-200">
               View Live Demo
             </Button>

@@ -4,60 +4,52 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { LogOut, User, Bell } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 export function Navbar() {
-  const { user, logout } = useAuthStore();
+const { user, logout } = useAuthStore();
   const router = useRouter();
 
   const handleLogout = () => {
     logout();
-    router.push("/login");
+    toast.success("Logged out successfully");
+    setTimeout(()=>{
+      router.push("/login");
+    },3000)
   };
-
+console.log("iser",user)
   return (
-    <header className="h-16 border-b bg-white/80 backdrop-blur-md sticky top-0 z-10 px-8">
-      <div className="flex h-full items-center justify-between">
-        <div className="flex items-center gap-4">
-          <h2 className="text-sm font-semibold text-slate-500 hidden md:block">
-            {user?.role === 'PRINCIPAL' ? 'Administrative Portal' : 'Faculty Dashboard'}
-          </h2>
-        </div>
+<nav className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Left: Brand/Logo */}
+      <div></div>
 
+        {/* Right: User Info & Logout */}
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="text-slate-400">
-            <Bell className="h-5 w-5" />
-          </Button>
-          
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full bg-slate-100 p-0 border border-slate-200">
-                <User className="h-5 w-5 text-slate-600" />
+          {user && (
+            <>
+              <div className="flex flex-col items-end hidden md:flex">
+                <span className="text-sm font-medium text-slate-900">{user.name}</span>
+                <span className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">
+                  {user.role}
+                </span>
+              </div>
+              
+              <div className="h-8 w-px bg-slate-200 mx-1" />
+
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={handleLogout}
+                className="text-slate-500 cursor-pointer hover:text-red-600 hover:bg-red-50 transition-colors"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">Logout</span>
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 mt-2">
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{user?.name}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout} className="text-red-600 cursor-pointer focus:bg-red-50 focus:text-red-600">
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </>
+          )}
         </div>
       </div>
-    </header>
+    </nav>
   );
 }
