@@ -17,7 +17,7 @@ export function Sidebar() {
   return (
     <div className="flex h-full w-64 flex-col border-r bg-white/50 backdrop-blur-xl">
       <div className="flex h-16 items-center px-6 border-b">
-        <span className="text-xl font-bold tracking-tight text-blue-600">EduCast</span>
+        <Link href="/" className="text-xl font-bold tracking-tight text-blue-600">EduCast</Link>
       </div>
       
       <nav className="flex-1 space-y-1 p-4">

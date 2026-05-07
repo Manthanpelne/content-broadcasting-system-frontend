@@ -16,7 +16,7 @@ export default function PublicLivePage() {
   useEffect(() => {
 
     if (teacherId === "undefined" || !teacherId){
-       alert("Login first !!");
+       toast.error("Login first !!");
        setLoading(false);
        router.push("/login")
        return;

@@ -1,29 +1,27 @@
 "use client"
 
-import { useEffect, useState } from "react";
 import { StatsCard } from "@/components/statsCard";
 import { ContentService } from "@/services/content-service";
+import { useQuery } from "@tanstack/react-query";
 import { LayoutDashboard, AlertCircle, CheckCircle, Ban } from "lucide-react";
 
 export default function PrincipalDashboard() {
-  const [stats, setStats] = useState({ total: 0, pending: 0, approved: 0, rejected: 0 });
-  const [loading, setLoading] = useState(true);
+ 
+  const { data: items, isLoading } = useQuery({
+    queryKey: ['all-content'], // Using a generic key for all content
+    queryFn: ContentService.getAllContent,
+    refetchInterval: 30000 
+  });
 
-  useEffect(() => {
-    async function loadStats() {
-      const data = await ContentService.getAllContent();
-      setStats({
-        total: data.length,
-        pending: data.filter(i => i.status === 'pending').length,
-        approved: data.filter(i => i.status === 'approved').length,
-        rejected: data.filter(i => i.status === 'rejected').length,
-      });
-      setLoading(false);
-    }
-    loadStats();
-  }, []);
+  const stats = {
+    total: items?.length || 0,
+    pending: items?.filter(i => i.status === 'pending').length || 0,
+    approved: items?.filter(i => i.status === 'approved').length || 0,
+    rejected: items?.filter(i => i.status === 'rejected').length || 0,
+  };
 
-  if(loading) return <DashboardSkeleton/>
+  // 3. React Query handles the loading state
+  if (isLoading) return <DashboardSkeleton />;
 
   return (
     <div className="space-y-8">

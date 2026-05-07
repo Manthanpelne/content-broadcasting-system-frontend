@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function StatsCard({ title, value, icon: Icon, description, className }) {
   return (
-    <Card className={cn("overflow-hidden border-none shadow-sm ring-1 ring-slate-200", className)}>
+    <Card className={cn("overflow-hidden border-none backdrop-blur-sm shadow-sm transition-all hover:shadow-md ring-1 ring-slate-200", className)}>
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>

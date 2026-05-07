@@ -46,6 +46,14 @@ export default function UploadPage() {
   });
 };
 
+const onDrop = (e) => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    // Reuse your base64 conversion logic here
+    handleFileSelection(file);
+  }
+};
 
 
   const onSubmit = async (data) => {
@@ -115,7 +123,10 @@ export default function UploadPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center space-y-2 text-slate-500">
+                  <div 
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={onDrop} 
+                  className="flex flex-col items-center justify-center space-y-2 text-slate-500">
                     <div className="p-3 bg-white rounded-full shadow-sm ring-1 ring-slate-200">
                       <Upload className="h-6 w-6" />
                     </div>

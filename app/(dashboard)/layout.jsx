@@ -5,12 +5,15 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Sidebar } from "@/components/sidebar";
 import { Navbar } from "@/components/navbar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
 export default function DashboardLayout({ children }) {
   const { user, isAuthenticated } = useAuthStore();
 const router = useRouter();
   const [isHydrated, setIsHydrated] = useState(false);
+
+  const queryClient = new QueryClient()
 
   // Wait for Zustand to hydrate from localStorage
   useEffect(() => {
@@ -31,6 +34,7 @@ const router = useRouter();
   if (!isAuthenticated) return null;
 
   return (
+  <QueryClientProvider client={queryClient}>
     <div className="flex h-screen bg-slate-50/50">
       <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
@@ -42,5 +46,6 @@ const router = useRouter();
         </main>
       </div>
     </div>
+  </QueryClientProvider>
   );
 }
