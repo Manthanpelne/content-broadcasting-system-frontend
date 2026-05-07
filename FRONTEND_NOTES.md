@@ -1,5 +1,5 @@
-🎓 EduCart - Content Broadcasting System Frontend Documentation
-Welcome to the EduCart dashboard. This project is built with Next.js 15, Tailwind CSS, and Zustand. It’s designed to be sleek, fast, and easy to use for both Teachers and Principals.
+🎓 Educast - Content Broadcasting System Frontend Documentation
+Welcome to the Educast dashboard. This project is built with Next.js 15, Tailwind CSS, and Zustand. It’s designed to be sleek, fast, and easy to use for both Teachers and Principals.
 
 ## 📂 Project Structure: Where things live
 I’ve organized the code so it’s easy to find exactly what you’re looking for:
