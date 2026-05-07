@@ -77,7 +77,7 @@ const onSubmit = async (data) => {
           </form>
           
           <div className="mt-4 text-center text-xs text-muted-foreground">
-            <p>Hint: use "admin@test.com" for Principal role</p>
+            <p>Hint: use "admin@test.com" for Principal role, "teacher@test.com" for teacher role, password : any 6 characters or numbers for both</p>
           </div>
         </CardContent>
       </Card>

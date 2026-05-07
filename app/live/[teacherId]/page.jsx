@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { ContentService } from "@/services/content-service";
 import { useParams, useRouter } from "next/navigation";
-import { Loader2, MonitorOff } from "lucide-react";
+import { Link, Link2, Loader2, MonitorOff } from "lucide-react";
 import {toast} from "sonner"
+import Link from 'next/link';
 
 export default function PublicLivePage() {
   const { teacherId } = useParams();
@@ -54,6 +55,10 @@ export default function PublicLivePage() {
       <MonitorOff className="h-16 w-16 mb-4 opacity-20" />
       <h1 className="text-xl font-medium">No content currently broadcasting</h1>
       <p className="text-sm text-slate-400">Please check back later.</p>
+      <Link href="/" className="mt-6 inline-flex items-center gap-2 text-blue-600 hover:underline">
+        <Link className="h-4 w-4" />
+        Back to Dashboard
+      </Link>
        
     </div>
   );
